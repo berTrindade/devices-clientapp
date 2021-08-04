@@ -24,11 +24,10 @@ export const DeviceProvider = ({children}) => {
 
   const addDevice = async (device) => {
     try {
-      const newDevice = await axios.post(BASE_URL, {
+      await axios.post(BASE_URL, {
         ...device
       });
       fetchDevices();
-      return newDevice;
       
     } catch (error) {
       console.log(error)
@@ -38,7 +37,7 @@ export const DeviceProvider = ({children}) => {
 
   const updateDevice = async (device) => {
     try {
-      const updatedDevice = await axios.put(BASE_URL + device.id, {
+      await axios.put(BASE_URL + device.id, {
         ...device
       });
       fetchDevices();
@@ -50,8 +49,8 @@ export const DeviceProvider = ({children}) => {
 
   const deleteDevice = async (device) => {
     try {
-      const deletedDevice = await axios.delete(BASE_URL + device.id, {
-        ...device
+      await axios.delete(BASE_URL + device.id, {
+        id: device.id
       });
       fetchDevices();
       
