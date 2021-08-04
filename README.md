@@ -28,7 +28,7 @@ npm install or yarn install
 ## 3. Set up environment variables
 
 ```
-cp .env.local.example .env.local
+cp .env.sample .env
 ```
 Then set your backend server URL
 ```
