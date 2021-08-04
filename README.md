@@ -23,6 +23,7 @@ git clone https://github.com/emdavidmoreno/devices-clientapp
 ## 2. Install dependencies: 
 
 ```
+cd devices-clientapp
 npm install or yarn install
 ```
 ## 3. Set up environment variables
