@@ -5,7 +5,8 @@ import DeviceForm from "./component/DeviceForm";
 import Modal from "./component/Modal";
 import {useDevices} from './contexts/devices.context';
 import {useFilter} from './contexts/filter.context';
-import {SORT_DIRECTION_ASC, SORT_DIRECTION_DESC} from './constants';
+import {SORT_DIRECTION_ASC} from './constants';
+import TopBar from "./component/TopBar";
 
 const INITIAL_FORM_DATA = {
   "id": "",
@@ -30,11 +31,11 @@ function App() {
           return direction === SORT_DIRECTION_ASC ? a.hdd_capacity - b.hdd_capacity: b.hdd_capacity - a.hdd_capacity
       
         default:
-          if(a[sortBy].toLowerCase() < b[sortBy].toLowerCase()) { 
-            return direction === SORT_DIRECTION_DESC ? 1 : -1; 
-          }
-          if(a[sortBy].toLowerCase() > b[sortBy].toLowerCase()) { 
+          if(a[sortBy] < b[sortBy]) { 
             return direction === SORT_DIRECTION_ASC ? -1 : 1; 
+          }
+          if(a[sortBy] > b[sortBy]) { 
+            return  direction === SORT_DIRECTION_ASC ? 1 : -1; 
           }
           return 0;
           
@@ -81,36 +82,38 @@ function App() {
   
 
   return (
-    <div className="flex flex-col w-full max-w-3xl mx-auto px-4 pt-8">
-      dashboard
-      <div className="flex right-0 w-full justify-end">
-        <button 
-         type="button" 
-         className="bg-blue-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-blue-600 transition duration-200 each-in-out"
-         onClick={handleAddDevice}
-        > add device</button>
+    <div className="flex w-screen h-screen">
+      <TopBar />
+      <div className="flex flex-col w-full max-w-3xl mx-auto px-4 pt-8 mt-16">
+        <div className="flex right-0 w-full justify-end">
+          <button 
+          type="button" 
+          className="bg-gray-500 text-white px-6 py-2 rounded font-medium mx-3 hover:bg-gray-600 transition duration-200 each-in-out"
+          onClick={handleAddDevice}
+          > Add device</button>
+        </div>
+        <Modal 
+          isOpen={showForm}
+          setIsOpen={setShowForm}
+          title={formData.id? 'Edit device' : 'Add device'}
+        >
+          <DeviceForm
+            item={formData}
+            handleChange={handleChange}
+            handleSave={handleSaveDevice}
+            handleCancel={handleCancelForm}
+          />
+        </Modal>
+        <DeviceFilter />
+        {filteredDevices.map(item => (
+          <Device 
+            key={item.id}
+            item={item} 
+            handleEdit={handleEditDevice}
+            handleRemove={handleDeleteDevice}
+            handleSave={handleSaveDevice} />
+        ))}
       </div>
-      <Modal 
-        isOpen={showForm}
-        setIsOpen={setShowForm}
-        title={formData.id? 'Edit device' : 'Add device'}
-      >
-        <DeviceForm
-          item={formData}
-          handleChange={handleChange}
-          handleSave={handleSaveDevice}
-          handleCancel={handleCancelForm}
-        />
-      </Modal>
-      <DeviceFilter />
-      {filteredDevices.map(item => (
-        <Device 
-          key={item.id}
-          item={item} 
-          handleEdit={handleEditDevice}
-          handleRemove={handleDeleteDevice}
-          handleSave={handleSaveDevice} />
-      ))}
     </div>
   );
 }
