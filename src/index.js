@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { FilterProvider } from './contexts/filter.context';
+import { DeviceProvider } from './contexts/devices.context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <DeviceProvider>
+      <FilterProvider>
+        <App />
+      </FilterProvider>
+    </DeviceProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
