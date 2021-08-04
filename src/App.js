@@ -84,7 +84,7 @@ function App() {
   return (
     <div className="flex w-screen h-screen">
       <TopBar />
-      <div className="flex flex-col w-full max-w-3xl mx-auto px-4 pt-8 mt-16">
+      <div className="flex flex-col w-full max-w-3xl mx-auto px-4 pt-8 mt-16 mb-8 h-auto">
         <div className="flex right-0 w-full justify-end">
           <button 
           type="button" 

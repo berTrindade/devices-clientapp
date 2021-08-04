@@ -1,4 +1,4 @@
-import React from "react";
+import { FaTimes } from "react-icons/fa";
 
 export default function Modal({
   title = 'Modal title',
@@ -22,12 +22,10 @@ export default function Modal({
                     {title}
                   </h3>
                   <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-1 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    className="p-1 ml-auto bg-transparent border-0 text-gray-600 opacity-1 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => setIsOpen(false)}
                   >
-                    <span className="bg-transparent text-black h-6 w-6 text-2xl text-bold block outline-none focus:outline-none">
-                      x
-                    </span>
+                    <FaTimes className="h-6 w-8 fill-current"/>
                   </button>
                 </div>
                 {/*body*/}

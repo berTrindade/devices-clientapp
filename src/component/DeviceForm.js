@@ -41,7 +41,7 @@ const DeviceForm = ({
         /> 
       </div>
       <div className="relative flex flex-col md:flex-row w-full md:justify-between">
-        <label htmlFor="hdd_capacity"> HDD Capacity* </label>
+        <label htmlFor="hdd_capacity"> HDD Capacity (Gb)* </label>
         <input 
           type="number" 
           id="hdd_capacity"
