@@ -1,3 +1,4 @@
+import {FaChevronDown, FaChevronUp, FaSortAmountDown, FaSortAmountDownAlt, FaSortAmountUp, FaSortAmountUpAlt, FaSortDown, FaSortUp} from 'react-icons/fa';
 import Select from "react-select";
 import { 
   SORT_DIRECTION_ASC, 
@@ -29,6 +30,7 @@ const DeviceFilter = () => {
 
   return (
     <div className="flex flex-col md:flex-row w-full my-2 ">
+
       <div className="mr-4 w-full md:w-1/2"> Device type : 
         <Select
           id={deviceTypes}
@@ -42,16 +44,33 @@ const DeviceFilter = () => {
         />  
       </div>
       <div className="mr-4 w-full md:w-1/2"> Sort by :  
-        <Select
-          id={'sortBy'}
-          name={'sortBy'}
-          value={selected}
-          options={sortingOptions}
-          getOptionLabel={(option) => option.label}
-          getOptionValue={(option) => option.value}
-          onChange={(option) =>setSortBy(option.value)}
-        />
-        <button onClick={changeDirection}>{direction}</button>
+        <div className="flex justify-between">
+          <Select
+            id={'sortBy'}
+            name={'sortBy'}
+            className="w-full"
+            value={selected}
+            options={sortingOptions}
+            getOptionLabel={(option) => option.label}
+            getOptionValue={(option) => option.value}
+            onChange={(option) =>setSortBy(option.value)}
+          />
+          <button 
+            className="border border-gray-400 ml-1 rounded w-10 text-gray-600 font-bold"
+            onClick={changeDirection}
+          >
+            {direction === SORT_DIRECTION_DESC && (
+              <FaSortAmountDown
+                className="h-6 w-8 fill-current"
+              />
+            )}
+            {direction === SORT_DIRECTION_ASC && (
+              <FaSortAmountUp
+                className="h-6 w-8 fill-current"
+              />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import {FaEdit, FaRem, FaTrashAlt} from 'react-icons/fa'
 const Device = ({
   item, 
   handleEdit,
@@ -10,18 +11,19 @@ const Device = ({
         <div className="text-md font-bold text-blue-700 w-auto">{item.type}</div>
         <div className="text-sm font-bold text-gray-700 w-auto">{item.hdd_capacity} Gb</div>
       </div>
-      <div className="flex items-center w-32">
+      <div className="flex items-center w-20">
         <button
-          className="inline-block px-2 py-2 text-xs font-bold leading-6 text-center text-blue-700 underline transition bg-transparent rounded ripple hover:text-blue-900 focus:outline-none"
+          className="inline-block px-2 py-2 text-xs leading-6 text-center text-gray-600 underline transition bg-transparent rounded ripple hover:text-blue-700 focus:outline-none"
           onClick={()=>handleEdit(item)}
         >
-          Edit
+          <FaEdit
+            className="h-6 w-8 fill-current"/>
         </button> 
         <button
-          className="inline-block px-2 py-2 text-xs font-bold leading-6 text-center text-red-700 underline  transition bg-transparent rounded ripple hover:text-red-900 focus:outline-none"
+          className="inline-block px-2 py-2 text-xs leading-6 text-center text-red-600 underline  transition bg-transparent rounded ripple hover:text-red-700 focus:outline-none"
           onClick={()=> handleRemove(item)}
         >
-          Remove
+          <FaTrashAlt className="h-6 w-8 fill-current" />
         </button> 
       </div>
     </div>
