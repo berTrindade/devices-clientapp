@@ -23,6 +23,7 @@ git clone https://github.com/emdavidmoreno/devices-clientapp
 ## 2. Install dependencies: 
 
 ```
+cd devices-clientapp
 npm install or yarn install
 ```
 ## 3. Set up environment variables
@@ -30,7 +31,7 @@ npm install or yarn install
 ```
 cp .env.sample .env
 ```
-Then set your backend server URL
+Then set your backend server URL (the server app referred above. Please make sure they have diferent port if they are using localhost. By default the server project is using port 3000 like this app.
 ```
 REACT_APP_API_URL = 'http://your-backend-server-url'
 ```
