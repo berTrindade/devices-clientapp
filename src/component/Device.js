@@ -1,4 +1,5 @@
-import {FaEdit, FaRem, FaTrashAlt} from 'react-icons/fa'
+import {FaEdit, FaTrashAlt} from 'react-icons/fa';
+
 const Device = ({
   item, 
   handleEdit,

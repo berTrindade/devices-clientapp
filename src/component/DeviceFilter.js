@@ -1,4 +1,4 @@
-import {FaChevronDown, FaChevronUp, FaSortAmountDown, FaSortAmountDownAlt, FaSortAmountUp, FaSortAmountUpAlt, FaSortDown, FaSortUp} from 'react-icons/fa';
+import { FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import Select from "react-select";
 import { 
   SORT_DIRECTION_ASC, 
