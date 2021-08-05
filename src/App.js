@@ -111,7 +111,7 @@ function App() {
             item={item} 
             handleEdit={handleEditDevice}
             handleRemove={handleDeleteDevice}
-            handleSave={handleSaveDevice} />
+          />
         ))}
       </div>
     </div>
