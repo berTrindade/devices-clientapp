@@ -5,6 +5,7 @@ const Device = ({
   handleEdit,
   handleRemove,
 }) => {
+  if(!item.id || !item.system_name || !item.type || !item.hdd_capacity ) return null;
   return (
     <div className="flex w-full rounded-xl bg-gray-50 border border-gray-150 py-2 my-1 px-4 justify-between">
       <div className="flex w-full flex-col">
