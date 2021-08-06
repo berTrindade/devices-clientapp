@@ -9,10 +9,10 @@ import {SORT_DIRECTION_ASC} from './constants';
 import TopBar from "./component/TopBar";
 
 const INITIAL_FORM_DATA = {
-  "id": "",
-  "system_name": "",
-  "type": "",
-  "hdd_capacity": "0"
+  id: '',
+  system_name: '',
+  type: '',
+  hdd_capacity: '0'
 }
  
 
@@ -65,12 +65,19 @@ function App() {
   }
 
   const handleSaveDevice = () => {
+    if(
+      formData.system_name === '' ||
+      formData.type === '' ||
+      formData.hdd_capacity === ''
+    ) {
+        return;
+      }
     if(formData.id) {
       // edit device
       updateDevice(formData);
     } else {
-      addDevice(formData);
       // Add new device
+      addDevice(formData);
     }
     handleCancelForm();
 
