@@ -11,6 +11,7 @@ Front end application build on [React](https://reactjs.com). and styled using [T
 - Filters using [React-Select](https://react-select.com/upgrade-guide)
 - Multiple device type filter
 - Sorting and Acendent and Descendent
+- Form validation
 - Server application used: [devicesTask_serverApp](https://github.com/NinjaRMM/devicesTask_serverApp)
 
 # Installation and usage
