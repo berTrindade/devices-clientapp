@@ -49,10 +49,10 @@ export const DeviceProvider = ({children}) => {
     }
   }
 
-  const deleteDevice = async () => {
+  const deleteDevice = async (device) => {
     try {
-      await axios.delete(BASE_URL + selectedDevice.id, {
-        id: selectedDevice.id
+      await axios.delete(BASE_URL + device.id, {
+        id: device.id
       });
       fetchDevices();
       

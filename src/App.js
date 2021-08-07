@@ -75,8 +75,7 @@ function App() {
   }
 
   const handleDeleteDevice = (device) => {
-    updateSelectedDevice(device);
-    deleteDevice();
+    deleteDevice(device);
   }
   
 
