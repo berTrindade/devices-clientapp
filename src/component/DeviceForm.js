@@ -1,11 +1,4 @@
-import Select from "react-select";
-import { MAC, WINDOWS_SERVER, WINDOWS_WORKSTATION } from "../constants";
-
-const deviceOptions = [
-  {label:WINDOWS_WORKSTATION,value:WINDOWS_WORKSTATION},
-  { label:WINDOWS_SERVER,value:WINDOWS_SERVER},
-  {label: MAC,value: MAC}
-];
+import SingleDeviceFilter from "./filters/SingleDeviceFilter";
 
 const FieldNotEmptyMessage = () => <span className="flex text-xs font-bold text-red-600 my-1"> field can not be empty</span>
 
@@ -38,17 +31,11 @@ const DeviceForm = ({
       <div className="relative flex flex-col md:flex-row w-full md:justify-between">
         <label htmlFor="type"  className="flex w-full md:w-2/5"> Type* </label>
         <div className="flex flex-col w-full md:3/5 ">
-          <Select
-            id={'type'}
-            name={'type'}
-            options={deviceOptions}
-            getOptionValue={option=> option.value}
-            getOptionLabel={option=> option.label}
-            className="w-full"
-            value={deviceOptions.find(option => option.value === item.type)}
-            onChange={option=>handleChange('type', option.value)}
-          /> 
-          {item.type === '' &&  <FieldNotEmptyMessage/>}
+          <SingleDeviceFilter
+            value={item.type}
+            onChange={handleChange}
+          />
+         {item.type === '' &&  <FieldNotEmptyMessage/>}
         </div>
       </div>
       <div className="relative flex flex-col md:flex-row w-full md:justify-between">
