@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { INITIAL_DEVICE_DATA } from "../constants";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -7,7 +8,8 @@ const DeviceContext = createContext();
 
 export const DeviceProvider = ({children}) => {
   const [devices, setDevices] = useState([]);
-
+  const [selectedDevice, updateSelectedDevice] = useState(INITIAL_DEVICE_DATA);
+  
   useEffect(()=>{
     fetchDevices();
   }, [])
@@ -22,10 +24,10 @@ export const DeviceProvider = ({children}) => {
     }
   }
 
-  const addDevice = async (device) => {
+  const addDevice = async () => {
     try {
       await axios.post(BASE_URL, {
-        ...device
+        ...selectedDevice
       });
       fetchDevices();
       
@@ -35,10 +37,10 @@ export const DeviceProvider = ({children}) => {
 
   }
 
-  const updateDevice = async (device) => {
+  const updateDevice = async () => {
     try {
-      await axios.put(BASE_URL + device.id, {
-        ...device
+      await axios.put(BASE_URL + selectedDevice.id, {
+        ...selectedDevice
       });
       fetchDevices();
       
@@ -47,10 +49,10 @@ export const DeviceProvider = ({children}) => {
     }
   }
 
-  const deleteDevice = async (device) => {
+  const deleteDevice = async () => {
     try {
-      await axios.delete(BASE_URL + device.id, {
-        id: device.id
+      await axios.delete(BASE_URL + selectedDevice.id, {
+        id: selectedDevice.id
       });
       fetchDevices();
       
@@ -61,6 +63,8 @@ export const DeviceProvider = ({children}) => {
   return (
     <DeviceContext.Provider value={{
       devices,
+      selectedDevice,
+      updateSelectedDevice,
       setDevices,
       addDevice,
       updateDevice,

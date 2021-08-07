@@ -1,26 +1,17 @@
 import { useMemo, useState } from "react";
 import Device from "./component/Device";
-import DeviceFilter from "./component/DeviceFilter";
 import DeviceForm from "./component/DeviceForm";
 import Modal from "./component/Modal";
 import {useDevices} from './contexts/devices.context';
 import {useFilter} from './contexts/filter.context';
-import {SORT_DIRECTION_ASC} from './constants';
+import { DIRECTION, INITIAL_DEVICE_DATA } from './constants';
 import TopBar from "./component/TopBar";
-
-const INITIAL_FORM_DATA = {
-  id: '',
-  system_name: '',
-  type: '',
-  hdd_capacity: '0'
-}
- 
+import FilterForm from "./component/filters/FilterForm";
 
 function App() {
-  const {devices, updateDevice, deleteDevice, addDevice} = useDevices();
-  const [formData, setFormData] = useState(INITIAL_FORM_DATA);
+  const {devices, selectedDevice, updateSelectedDevice, updateDevice, deleteDevice, addDevice} = useDevices();
   const [showForm, setShowForm] = useState(false);
-  const {sortBy = '', deviceTypes = [], direction = SORT_DIRECTION_ASC} = useFilter();
+  const {sortBy = '', deviceTypes = [], direction = DIRECTION.SORT_DIRECTION_ASC} = useFilter();
 
   const filteredDevices = useMemo(()=> devices.filter(
     device =>deviceTypes.length === 0 ? true : deviceTypes.includes(device.type)
@@ -28,14 +19,14 @@ function App() {
       if(sortBy === '') return 0; 
       switch (sortBy) {
         case 'hdd_capacity':
-          return direction === SORT_DIRECTION_ASC ? a.hdd_capacity - b.hdd_capacity: b.hdd_capacity - a.hdd_capacity
+          return direction === DIRECTION.SORT_DIRECTION_ASC ? a.hdd_capacity - b.hdd_capacity: b.hdd_capacity - a.hdd_capacity
       
         default:
           if(a[sortBy] < b[sortBy]) { 
-            return direction === SORT_DIRECTION_ASC ? -1 : 1; 
+            return direction === DIRECTION.SORT_DIRECTION_ASC ? -1 : 1; 
           }
           if(a[sortBy] > b[sortBy]) { 
-            return  direction === SORT_DIRECTION_ASC ? 1 : -1; 
+            return  direction === DIRECTION.SORT_DIRECTION_ASC ? 1 : -1; 
           }
           return 0;
           
@@ -43,48 +34,49 @@ function App() {
     }),[sortBy, deviceTypes, devices, direction]) 
 
   const handleChange = (name, value) => {
-    setFormData({
-      ...formData,
+    updateSelectedDevice({
+      ...selectedDevice,
       [name]: value,
     })
   }
   const handleCancelForm = () => {
     setShowForm(false);
-    setFormData(INITIAL_FORM_DATA);
+    updateSelectedDevice(INITIAL_DEVICE_DATA);
   }
 
 
   const handleAddDevice = () => {
-    setFormData(INITIAL_FORM_DATA);
+    updateSelectedDevice(INITIAL_DEVICE_DATA);
     setShowForm(true);
   }
 
   const handleEditDevice = (device) => {
-    setFormData(device);
+    updateSelectedDevice(device);
     setShowForm(true);
   }
 
   const handleSaveDevice = () => {
     if(
-      formData.system_name === '' ||
-      formData.type === '' ||
-      formData.hdd_capacity === ''
+      selectedDevice.system_name === '' ||
+      selectedDevice.type === '' ||
+      selectedDevice.hdd_capacity === ''
     ) {
         return;
       }
-    if(formData.id) {
+    if(selectedDevice.id) {
       // edit device
-      updateDevice(formData);
+      updateDevice();
     } else {
       // Add new device
-      addDevice(formData);
+      addDevice();
     }
     handleCancelForm();
 
   }
 
   const handleDeleteDevice = (device) => {
-    deleteDevice(device);
+    updateSelectedDevice(device);
+    deleteDevice();
   }
   
 
@@ -102,16 +94,16 @@ function App() {
         <Modal 
           isOpen={showForm}
           setIsOpen={setShowForm}
-          title={formData.id? 'Edit device' : 'Add device'}
+          title={selectedDevice.id? 'Edit device' : 'Add device'}
         >
           <DeviceForm
-            item={formData}
+            item={selectedDevice}
             handleChange={handleChange}
             handleSave={handleSaveDevice}
             handleCancel={handleCancelForm}
           />
         </Modal>
-        <DeviceFilter />
+        <FilterForm />
         {filteredDevices.map(item => (
           <Device 
             key={item.id}
