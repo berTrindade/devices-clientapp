@@ -9,7 +9,7 @@ import TopBar from "./component/TopBar";
 import FilterForm from "./component/filters/FilterForm";
 
 function App() {
-  const {devices, selectedDevice, updateSelectedDevice, updateDevice, deleteDevice, addDevice} = useDevices();
+  const {devices = [], selectedDevice, updateSelectedDevice, updateDevice, deleteDevice, addDevice} = useDevices();
   const [showForm, setShowForm] = useState(false);
   const {sortBy = '', deviceTypes = [], direction = DIRECTION.SORT_DIRECTION_ASC} = useFilter();
 

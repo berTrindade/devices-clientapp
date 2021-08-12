@@ -9,11 +9,13 @@ const DirectionFilter = ({direction, changeDirection}) => {
     >
       {direction === DIRECTION.SORT_DIRECTION_DESC && (
         <FaSortAmountDown
+          data-testid={DIRECTION.SORT_DIRECTION_DESC}
           className="h-6 w-8 fill-current"
         />
       )}
       {direction === DIRECTION.SORT_DIRECTION_ASC && (
         <FaSortAmountUp
+          data-testid={DIRECTION.SORT_DIRECTION_ASC}
           className="h-6 w-8 fill-current"
         />
       )}

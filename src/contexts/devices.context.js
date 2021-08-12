@@ -4,7 +4,7 @@ import { INITIAL_DEVICE_DATA } from "../constants";
 
 const BASE_URL = process.env.REACT_APP_API_URL;
 
-const DeviceContext = createContext();
+export const DeviceContext = createContext();
 
 export const DeviceProvider = ({children}) => {
   const [devices, setDevices] = useState([]);
